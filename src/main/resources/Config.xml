@@ -41,21 +41,29 @@
 <!--        </bean>-->
 
     <!--    For auto -Wire the ID of bean should be same as the name of reference as we are using byType here-->
-    <bean id="p1" class="org.example.Programmer" autowire="byType">
-        <!--            byType will search for same type of beans and assign it. (Multiple beans of same type will result in conflict and error)-->
-        <property name="age" value="26"/>
-        <!--            We will not create property tag for computer as we want to use Auto-wire for this-->
-    </bean>
+<!--    <bean id="p1" class="org.example.Programmer" autowire="byType">-->
+<!--        &lt;!&ndash;            byType will search for same type of beans and assign it. (Multiple beans of same type will result in conflict and error)&ndash;&gt;-->
+<!--        <property name="age" value="26"/>-->
+<!--        &lt;!&ndash;            We will not create property tag for computer as we want to use Auto-wire for this&ndash;&gt;-->
+<!--    </bean>-->
 
 <!--    Now this is an interface-->
 <!--    <bean id="cmp" class="org.example.Computer"/>-->
 
-<!--    As both Laptop and Desktop are type of Computer(Interface) in the heirarchy-->
-<!--    ByType will call both and have an error but we could use Primary to target a specific class-->
-    <bean id="lap" class="org.example.Laptop" primary="true"/>
+<!--&lt;!&ndash;    As both Laptop and Desktop are type of Computer(Interface) in the heirarchy&ndash;&gt;-->
+<!--&lt;!&ndash;    ByType will call both and have an error but we could use Primary to target a specific class&ndash;&gt;-->
+<!--    <bean id="lap" class="org.example.Laptop" primary="true"/>-->
 
-<!--    lazy initialization makes it so the bean is not created when application context is run but when it is needed While also staying singleton-->
-    <bean id="desk" class="org.example.Desktop" lazy-init="true"/>
-<!--But if an eager bean like Programmer is auto wired to lazy bean like desktop then lazy bean will also become eager bean-->
+<!--&lt;!&ndash;    lazy initialization makes it so the bean is not created when application context is run but when it is needed While also staying singleton&ndash;&gt;-->
+<!--    <bean id="desk" class="org.example.Desktop" lazy-init="true"/>-->
+<!--&lt;!&ndash;But if an eager bean like Programmer is auto wired to lazy bean like desktop then lazy bean will also become eager bean&ndash;&gt;-->
 
+<!-- INNER BEAN-->
+    <bean id="p1" class="org.example.Programmer">
+        <property name="age" value="26"/>
+        <property name="cmp">
+<!--            This is an inner class and can only be used by the Programmer Class here -->
+            <bean class="org.example.Desktop" />
+        </property>
+    </bean>
 </beans>
