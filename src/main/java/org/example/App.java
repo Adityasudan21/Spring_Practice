@@ -27,6 +27,6 @@ public class App
 
         System.out.println("Age of Programmer 2: "+Programmer2.getAge());
 
-//        Programmer1.code();
+        Programmer1.code();
     }
 }

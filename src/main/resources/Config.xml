@@ -7,8 +7,10 @@
     <!-- bean definitions here -->
 <!--    <bean id="p1" class="org.example.Programmer" >-->
 <!--    </bean>    -->
-    <bean id="comp" class="org.example.Computer">
-    </bean>
+
+<!--    Now this is an interface -->
+<!--    <bean id="comp" class="org.example.Computer">-->
+<!--    </bean>-->
 
 <!--    This is Bean Prototype meaning the Constructor will be called at creation and each object of this ID will be different-->
 <!--    <bean id="p1" class="org.example.Programmer" scope="prototype"></bean>-->
@@ -25,9 +27,35 @@
 <!--        <property name="cmp" ref="comp"/> -->
 <!--    </bean>-->
 
-    <bean id="p1" class="org.example.Programmer">
-        <constructor-arg name="age" value="21"/>
-        <constructor-arg name="cmp" ref="comp"/>
+<!--    Constructor-arg usage | This will give error (when we call Computer object) as we are not defining the creation of Computer object-->
+<!--    <bean id="p1" class="org.example.Programmer">-->
+<!--        <constructor-arg name="age" value="21"/>-->
+<!--        <constructor-arg name="cmp" ref="comp"/>-->
+<!--    </bean>-->
+
+<!--&lt;!&ndash;    For auto -Wire the ID of bean should be same as the name of reference as we are using byName here&ndash;&gt;-->
+<!--        <bean id="p1" class="org.example.Programmer" autowire="byName">-->
+<!--&lt;!&ndash;            byType will search for same type of beans and assign it. (Multiple beans of same type will result in conflict and error)&ndash;&gt;-->
+<!--            <property name="age" value="26"/>-->
+<!--&lt;!&ndash;            We will not create property tag for computer as we want to use Auto-wire for this&ndash;&gt;-->
+<!--        </bean>-->
+
+    <!--    For auto -Wire the ID of bean should be same as the name of reference as we are using byType here-->
+    <bean id="p1" class="org.example.Programmer" autowire="byType">
+        <!--            byType will search for same type of beans and assign it. (Multiple beans of same type will result in conflict and error)-->
+        <property name="age" value="26"/>
+        <!--            We will not create property tag for computer as we want to use Auto-wire for this-->
     </bean>
+
+<!--    Now this is an interface-->
+<!--    <bean id="cmp" class="org.example.Computer"/>-->
+
+<!--    As both Laptop and Desktop are type of Computer(Interface) in the heirarchy-->
+<!--    ByType will call both and have an error but we could use Primary to target a specific class-->
+    <bean id="lap" class="org.example.Laptop" primary="true"/>
+
+<!--    lazy initialization makes it so the bean is not created when application context is run but when it is needed While also staying singleton-->
+    <bean id="desk" class="org.example.Desktop" lazy-init="true"/>
+<!--But if an eager bean like Programmer is auto wired to lazy bean like desktop then lazy bean will also become eager bean-->
 
 </beans>
