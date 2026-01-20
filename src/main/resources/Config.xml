@@ -7,9 +7,27 @@
     <!-- bean definitions here -->
 <!--    <bean id="p1" class="org.example.Programmer" >-->
 <!--    </bean>    -->
-    <bean id="p1" class="org.example.Programmer" scope="prototype">
+    <bean id="comp" class="org.example.Computer">
     </bean>
-    <bean id="c1" class="org.example.Computer">
+
+<!--    This is Bean Prototype meaning the Constructor will be called at creation and each object of this ID will be different-->
+<!--    <bean id="p1" class="org.example.Programmer" scope="prototype"></bean>-->
+
+<!--    <bean id="p1" class="org.example.Programmer">-->
+<!--        -->
+<!--        &lt;!&ndash;This is how we set the property (attribute) value. This        &ndash;&gt;-->
+<!--        <property name="age" value="21"/> -->
+<!--        -->
+<!--        &lt;!&ndash; Ref is used when we are not setting a Primitive value | This will create a new object &ndash;&gt;-->
+<!--        <property name="cmp" ref="org.example.Computer"/>-->
+
+<!--        &lt;!&ndash; Ref is having the ID of bean computer as we want to WIRE them  | This will point to above menitioned object &ndash;&gt;-->
+<!--        <property name="cmp" ref="comp"/> -->
+<!--    </bean>-->
+
+    <bean id="p1" class="org.example.Programmer">
+        <constructor-arg name="age" value="21"/>
+        <constructor-arg name="cmp" ref="comp"/>
     </bean>
 
 </beans>
